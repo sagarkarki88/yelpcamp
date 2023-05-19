@@ -1,0 +1,27 @@
+<nav class="navbar sticky-top navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid ">
+      <a class="navbar-brand" href="/home">Yelp-Camp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav">
+          <a class="nav-link active"  href="/campgrounds">Campgrounds</a>
+          <a class="nav-link" href="/campgrounds/new">New</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+          <% if (!currentUser){ %>
+            <a class="nav-link" href="/login">login</a>
+            <a class="nav-link" href="/register">signup</a>
+          <% } else { %>
+            <div class="navbar-nav">
+              <p class="nav-link">Hello <%=currentUser.username %></p> 
+            </div>
+            
+            <a class="nav-link" href="/logout">Logout</a>
+            <%}%>
+        </div>
+      </div>
+      
+    </div>
+  </nav>
