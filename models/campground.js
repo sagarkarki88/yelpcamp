@@ -22,11 +22,11 @@ const campgroundSchema = new Schema({
     geometry:{
         type:{
             type:String,
-            enum:["point"],
+            enum:['Point'],
             required:true
         },
         coordinates:{
-            type:String,
+            type:[Number],
             required:true
         }
     },

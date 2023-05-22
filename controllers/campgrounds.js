@@ -17,10 +17,15 @@ module.exports.showAllCampgrounds = async (req,res,next)=>{
 
 module.exports.addNew = async (req,res,next)=>{
     /* postman injection check  */
+    const gecoded = await geoCoder.forwardGeocode({
+        query: req.body.campground.location,
+        limit:1
+    }).send()
     if (!req.body.campground) throw new AppError('Invalid Campground Data', 400);
     const newSite = new campCollection(req.body.campground);
     newSite.images = req.files.map(f => ({url: f.path , filename: f.filename}))
     newSite.author = req.user._id
+    newSite.geometry = gecoded.body.features[0].geometry
     console.log(newSite)
     req.flash('success','Congratulation !!! New CampGoround Added Successfully.')
     await newSite.save()
