@@ -1,6 +1,11 @@
 const campCollection = require('../models/campground')
 const AppError = require('../utilities/Apperror')
 const {cloudinary} = require('../cloudinary')
+const axios = require('axios');
+
+const mbcGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
+const mapboxToken = process.env.MAPBOX_TOKEN;
+const geoCoder = mbcGeocoding({ accessToken: mapboxToken});
 
 module.exports.showAllCampgrounds = async (req,res,next)=>{
     const campgrounds = await campCollection.find({})
