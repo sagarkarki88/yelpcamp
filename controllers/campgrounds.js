@@ -1,7 +1,7 @@
 const campCollection = require('../models/campground')
 const AppError = require('../utilities/Apperror')
 const {cloudinary} = require('../cloudinary')
-const axios = require('axios');
+
 
 const mbcGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const mapboxToken = process.env.MAPBOX_TOKEN;
@@ -26,7 +26,7 @@ module.exports.addNew = async (req,res,next)=>{
     newSite.images = req.files.map(f => ({url: f.path , filename: f.filename}))
     newSite.author = req.user._id
     newSite.geometry = gecoded.body.features[0].geometry
-    console.log(newSite)
+    console.log(newSite.geometry.coordinates)
     req.flash('success','Congratulation !!! New CampGoround Added Successfully.')
     await newSite.save()
     res.redirect(`/campgrounds/${newSite.id}`)

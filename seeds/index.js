@@ -4,6 +4,8 @@
 if(process.env.NODE_ENV !== "production"){
     require('dotenv').config()
 }
+
+
 const multer = require('multer')
 const {storage} = require('../cloudinary/index')
 const upload = multer({storage})
@@ -13,6 +15,9 @@ const campground = require('../models/campground')
 const citiesData = require('./cities');
 const { descriptors, places } = require('./seedHelper');
 
+const mbcGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
+const mapboxToken ='pk.eyJ1Ijoic2FnYXJrYXJraTg4IiwiYSI6ImNsaHdscHg4YTBoeHEzc3BhNGsxczN1dXEifQ.MOd5mUG75MiQAxUvjenM5A'
+const geoCoder = mbcGeocoding({ accessToken: mapboxToken});
 
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -58,6 +63,11 @@ const seedDB = async ()=>{
                 url: 'https://source.unsplash.com/collection/483251'
             }
         });
+        const gecoded = await geoCoder.forwardGeocode({
+            query: c.location,
+            limit:1
+        }).send()
+        c.geometry = gecoded.body.features[0].geometry
         await c.save();
     }
     
