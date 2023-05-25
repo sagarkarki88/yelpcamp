@@ -15,9 +15,9 @@ const campground = require('../models/campground')
 const citiesData = require('./cities');
 const { descriptors, places } = require('./seedHelper');
 
-const mbcGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
+/* const mbcGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const mapboxToken ='pk.eyJ1Ijoic2FnYXJrYXJraTg4IiwiYSI6ImNsaHdscHg4YTBoeHEzc3BhNGsxczN1dXEifQ.MOd5mUG75MiQAxUvjenM5A'
-const geoCoder = mbcGeocoding({ accessToken: mapboxToken});
+const geoCoder = mbcGeocoding({ accessToken: mapboxToken}); */
 
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -51,7 +51,7 @@ const sample = array => array[Math.floor(Math.random()* array.length)];
 
 const seedDB = async ()=>{
     await campground.deleteMany({})
-    for(i=0;i<100;i++){
+    for(i=0;i<400;i++){
         const randomentry = Math.floor(Math.random() * 1000)
         const c = new campground({
             author: '64562eaaeeac74a3e1b52701',
@@ -61,13 +61,20 @@ const seedDB = async ()=>{
             description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum repudiandae aperiam sit laboriosam fugit, ex animi maxime temporibus magnam officiis fuga? Corrupti accusamus saepe totam ad voluptas impedit commodi accusantium.",
             images:{
                 url: 'https://source.unsplash.com/collection/483251'
+            },
+            geometry: {
+                type: "Point",
+                coordinates: [
+                    citiesData[randomentry].longitude,
+                    citiesData[randomentry].latitude,
+                ]
             }
         });
-        const gecoded = await geoCoder.forwardGeocode({
+        /* const gecoded = await geoCoder.forwardGeocode({
             query: c.location,
             limit:1
-        }).send()
-        c.geometry = gecoded.body.features[0].geometry
+        }).send() */
+        /* c.geometry = gecoded.body.features[0].geometry */
         await c.save();
     }
     
