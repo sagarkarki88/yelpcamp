@@ -1,9 +1,10 @@
 <%- layout('/layouts/boilerplate') %>
     <link rel="stylesheet" href="/stylesheet/rating.css">
+    <link rel="stylesheet" href="/stylesheet/markerpop.css">
 
     <div class="row">
         <div class="col-6">
-            <div id='map' style='width: 400px; height: 300px;'></div>
+            <div id='map' style='width: 650px; height: 400px;'></div>
             <div class="card mb-3">
                 <div id="campgroundCarousel" class="carousel slide" data-ride="carousel">
                     <% if(campground.images.length> 1){ %>
@@ -137,9 +138,7 @@
         </div>
     </div>
     <script>
-
         const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
         const campground = <%-JSON.stringify(campground)%>
-        
     </script>
     <script src="/js/showPageMap.js"></script>

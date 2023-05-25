@@ -11,11 +11,11 @@
                                     <% if(campground.images.forEach((img,i)=>{ %>
                                     <li data-target="#campgroundCarousel" data-slide-to="<%=i%>" class="<%i === 0 ? 'active' : ''%>"></li>
                                     <%})) %>
-                                  </ol>
+                                </ol>
                         <% } %>  
                         <div class="carousel-inner">
                         <% campground.images.forEach((img,i)=>{%>
-                          <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+                          <div class="carousel-item <%= i === 0 ? 'active' :' '%>">
                                 <img class="d-block w-100" src="<%=img.url%>" alt="camp image">
                           </div>
                         <% })%>
