@@ -6,7 +6,7 @@
             <div class="col-6 offset-3">
                 <div class="card mb-3">
                     <div id="campgroundCarousel" class="carousel slide" data-ride="carousel">
-                        <% if(campground.images.length){ %>
+                        <% if(campground.images.length>1){ %>
                                 <ol class="carousel-indicators">
                                     <% if(campground.images.forEach((img,i)=>{ %>
                                     <li data-target="#campgroundCarousel" data-slide-to="<%=i%>" class="<%i === 0 ? 'active' : ''%>"></li>
@@ -22,7 +22,7 @@
         
                         </div>
         
-                        <% if(campground.images.length){ %>
+                        <% if(campground.images.length>1){ %>
                         <a class="carousel-control-prev" href="#campgroundCarousel" role="button" data-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span class="sr-only">Previous</span>

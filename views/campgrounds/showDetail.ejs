@@ -7,7 +7,7 @@
             <div id='map' style='width: 650px; height: 400px;'></div>
             <div class="card mb-3">
                 <div id="campgroundCarousel" class="carousel slide" data-ride="carousel">
-                    <% if(campground.images.length){ %>
+                    <% if(campground.images.length>1){ %>
                         <ol class="carousel-indicators">
                             <% if(campground.images.forEach((img,i)=>{ %>
                                 <li data-target="#campgroundCarousel" data-slide-to="<%=i%>"
@@ -24,7 +24,7 @@
 
                             </div>
 
-                            <% if(campground.images.length){ %>
+                            <% if(campground.images.length>1){ %>
                                 <a class="carousel-control-prev" href="#campgroundCarousel" role="button"
                                     data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
