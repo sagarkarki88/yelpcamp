@@ -7,6 +7,8 @@ const map = new mapboxgl.Map({
     zoom: 6, // starting zoom
 });
 
+map.addControl(new mapboxgl.NavigationControl());
+
 const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
     `<h3>${campground.title}</h3>`
     );
