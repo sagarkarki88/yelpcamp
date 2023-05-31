@@ -13,6 +13,7 @@ const Users = require('./models/users')
 const userRoutes = require('./routers/users.js')
 const passport = require('passport');
 const localStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize'); // securing mongo Injection
 
 /* const {campgroundJoiSchema, reviewJoiSchema} = require('./valSchema.js')
  */
@@ -36,6 +37,7 @@ app.use(methodOverride('_Method'));
     next()
 }) */
 app.use(express.static(path.join(__dirname,'public')));
+app.use(mongoSanitize());
 
 app.engine('ejs',ejsEngine);
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
