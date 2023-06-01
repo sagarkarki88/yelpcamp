@@ -71,11 +71,13 @@ function verifyPassword(req,res,next){
     }
 } 
 const sessionConfig  = {
+    name:'sessionId',
     secret: 'notanactaulsecret',
     resave : false,
     saveUninitialized: true,
     cookie: {
         httpOnly:true,
+       // secure:true, //cookies to be changed to only if secured.
         expires: Date.now() + 1000*60*60*24*7,
         maxAge:1000 * 60 * 60 * 24 * 7
     }
