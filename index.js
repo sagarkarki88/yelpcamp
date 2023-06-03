@@ -44,8 +44,8 @@ app.use(mongoSanitize());
 
 app.engine('ejs',ejsEngine);
 //mongodb://localhost:27017/yelp-camp //development database
-//const dbURL = process.env.DB_URL
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+const dbURL = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
+mongoose.connect(dbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -75,11 +75,11 @@ function verifyPassword(req,res,next){
         res.send("Passowrd didnt match");
     }
 } 
+const secret = process.env.SECRET;
 const MongoStore = require('connect-mongo');
-const dbURL = 'mongodb://localhost:27017/yelp-camp'
 const sessionConfig  = {
     name:'sessionId',
-    secret: 'notanactaulsecret',
+    secret: secret,
     resave : false,
     saveUninitialized: true,
     cookie: {
@@ -93,7 +93,7 @@ const sessionConfig  = {
         mongoUrl: dbURL,
         touchAfter: 24 * 3600,
         autoRemove: 'native',
-        secret: 'notsoverysecret'
+        secret: secret
         })
 }
 app.use(session(sessionConfig));
