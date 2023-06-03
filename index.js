@@ -5,6 +5,7 @@ if(process.env.NODE_ENV !== "production"){
 
 const express = require('express')
 const app = express()
+const helmet = require('helmet')
 
 const mongoose = require('mongoose')
 const path = require('path')
@@ -85,6 +86,7 @@ const sessionConfig  = {
     }
 }
 app.use(session(sessionConfig));
+app.use(helmet())
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
