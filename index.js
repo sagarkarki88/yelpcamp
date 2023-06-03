@@ -43,6 +43,8 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(mongoSanitize());
 
 app.engine('ejs',ejsEngine);
+//mongodb://localhost:27017/yelp-camp //development database
+//const dbURL = process.env.DB_URL
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
     useNewUrlParser: true,
     useUnifiedTopology: true
