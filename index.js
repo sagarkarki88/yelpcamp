@@ -75,6 +75,8 @@ function verifyPassword(req,res,next){
         res.send("Passowrd didnt match");
     }
 } 
+const MongoStore = require('connect-mongo');
+const dbURL = 'mongodb://localhost:27017/yelp-camp'
 const sessionConfig  = {
     name:'sessionId',
     secret: 'notanactaulsecret',
@@ -85,7 +87,14 @@ const sessionConfig  = {
        // secure:true, //cookies to be changed to only if secured.
         expires: Date.now() + 1000*60*60*24*7,
         maxAge:1000 * 60 * 60 * 24 * 7
-    }
+    },
+    store:  MongoStore.create(
+        { 
+        mongoUrl: dbURL,
+        touchAfter: 24 * 3600,
+        autoRemove: 'native',
+        secret: 'notsoverysecret'
+        })
 }
 app.use(session(sessionConfig));
 app.use(helmet())
