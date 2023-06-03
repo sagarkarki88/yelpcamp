@@ -51,7 +51,7 @@ const sample = array => array[Math.floor(Math.random()* array.length)];
 
 const seedDB = async ()=>{
     await campground.deleteMany({})
-    for(i=0;i<400;i++){
+    for(i=0;i<200;i++){
         const randomentry = Math.floor(Math.random() * 1000)
         const c = new campground({
             author: '64562eaaeeac74a3e1b52701',
@@ -60,7 +60,8 @@ const seedDB = async ()=>{
             price: Math.floor(Math.random() *20),
             description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum repudiandae aperiam sit laboriosam fugit, ex animi maxime temporibus magnam officiis fuga? Corrupti accusamus saepe totam ad voluptas impedit commodi accusantium.",
             images:{
-                url: 'https://source.unsplash.com/collection/483251'
+                /* url: 'https://source.unsplash.com/collection/483251' */
+                url:'https://res.cloudinary.com/dzhhytlb2/image/upload/v1684293906/cld-sample-2.jpg'
             },
             geometry: {
                 type: "Point",
