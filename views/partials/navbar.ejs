@@ -1,23 +1,20 @@
 <nav class="navbar sticky-top navbar-dark navbar-expand-lg bg-dark">
     <div class="container-fluid ">
       <a class="navbar-brand" href="/home">Yelp-Camp</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-brand"><%= currentUser ? 'Welcome Home '+currentUser.username : '' %></span> 
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active"  href="/campgrounds">All Campgrounds</a>
-          <a class="nav-link" href="/campgrounds/new">Add New Campground</a>
+          <a class="nav-link active"  href="/campgrounds">View All</a>
+          <a class="nav-link" href="/campgrounds/new">Add New</a>
         </div>
         <div class="navbar-nav ml-auto">
           <% if (!currentUser){ %>
-            <a class="nav-link" href="/login">Login here</a>
-            <a class="nav-link" href="/register">Signup here</a>
+            <a class="nav-link" href="/login">SignIn</a>
+            <a class="nav-link" href="/register">SignUp</a>
           <% } else { %>
-            <div class="navbar-nav">
-              <p class="nav-link">Hello <%=currentUser.username %></p> 
-            </div>
-            
             <a class="nav-link" href="/logout">Logout</a>
             <%}%>
         </div>
